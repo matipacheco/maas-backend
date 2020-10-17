@@ -6,7 +6,7 @@ RSpec.describe 'Services Controller', type: :request do
   describe 'GET /api/v1/services' do
     before { get '/api/v1/services' }
 
-    it 'returns todos' do
+    it 'returns services' do
       services = JSON.parse(response.body)
 
       expect(services).not_to be_empty

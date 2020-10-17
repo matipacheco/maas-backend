@@ -8,4 +8,9 @@ FactoryBot.define do
     availability { rand(1...20) }
   end
 
+  factory :week do
+    name { "Test Week" }
+    start_date { Date.today.beginning_of_week }
+  end
+
 end

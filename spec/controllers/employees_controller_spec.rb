@@ -6,7 +6,7 @@ RSpec.describe 'Employees Controller', type: :request do
   describe 'GET /api/v1/employees' do
     before { get '/api/v1/employees' }
 
-    it 'returns todos' do
+    it 'returns employees' do
       employees = JSON.parse(response.body)
 
       expect(employees).not_to be_empty
