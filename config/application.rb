@@ -47,6 +47,6 @@ module MaasBackend
       end
     end
 
-    require "./lib/core_extensions"
+    require './lib/core_extensions'
   end
 end

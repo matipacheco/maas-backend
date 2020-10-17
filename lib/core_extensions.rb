@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Date
   def date_format
-    self.strftime("%d/%m/%Y")
+    strftime('%d/%m/%Y')
   end
 end

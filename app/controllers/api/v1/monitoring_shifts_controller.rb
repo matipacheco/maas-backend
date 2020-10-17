@@ -4,7 +4,7 @@ module Api
   module V1
     class MonitoringShiftsController < ApplicationController
       before_action :permit_params, only: [:show]
-      
+
       def show
         render json: MonitoringShift.find_by(@params), status: 200
       end

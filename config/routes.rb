@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       resources :services, only: [:index]
       resources :employees, only: [:index]
 
-      get "/monitoring_shifts/:service_id/:week_id" => "monitoring_shifts#show"
+      get '/monitoring_shifts/:service_id/:week_id' => 'monitoring_shifts#show'
     end
   end
 end
