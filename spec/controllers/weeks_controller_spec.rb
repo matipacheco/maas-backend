@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Weeks Controller', type: :request do
-  let!(:weeks) {
+  let!(:weeks) do
     (-4..10).each do |number|
       week = 7.days
       end_day = Date.today.end_of_week
@@ -9,7 +11,7 @@ RSpec.describe 'Weeks Controller', type: :request do
 
       create(:week, end_date: end_day + number * week, start_date: start_day + number * week)
     end
-  }
+  end
 
   describe 'GET /api/v1/weeks' do
     before { get '/api/v1/weeks' }
