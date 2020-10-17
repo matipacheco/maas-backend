@@ -5,6 +5,11 @@ FactoryBot.define do
     name { 'Test Service' }
   end
 
+  factory :monitoring_schema do
+    structure { { 0 => (0...24).to_a } }
+    service
+  end
+
   factory :employee do
     name { 'Test Employee' }
     availability { rand(1...20) }

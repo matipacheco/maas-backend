@@ -14,13 +14,21 @@ Service.create(name: 'Brutal')
 MonitoringSchema.create(
   service: Service.first,
   structure: {
-    0 => (19..23),
-    1 => (19..23),
-    2 => (19..23),
-    3 => (19..23),
-    4 => (19..23),
-    5 => (0..23),
-    6 => (0..23)
+    0 => (19..24).to_a,
+    1 => (19..24).to_a,
+    2 => (19..24).to_a,
+    3 => (19..24).to_a,
+    4 => (19..24).to_a,
+    5 => (0..24).to_a,
+    6 => (0..24).to_a
+  }
+)
+
+MonitoringSchema.create(
+  service: Service.last,
+  structure: {
+    0 => (0..11).to_a,
+    1 => (0..11).to_a,
   }
 )
 
@@ -41,3 +49,4 @@ start_day = Date.today.beginning_of_week
 end
 
 MonitoringShift.create(service: Service.first, week: Week.first)
+MonitoringShift.create(service: Service.last, week: Week.first)

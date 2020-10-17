@@ -7,8 +7,8 @@ class Week < ApplicationRecord
 
   def as_json(*)
     super.tap do |hash|
-      hash['start_date'] = start_date.date_format
-      hash['end_date'] = end_date.date_format
+      hash['start_date'] = start_date.base_format
+      hash['end_date'] = end_date.base_format
     end
   end
 end
