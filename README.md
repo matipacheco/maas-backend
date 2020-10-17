@@ -1,24 +1,25 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Dependencies
 
-Things you may want to cover:
+* Ruby version: 2.7.0.
 
-* Ruby version
+* Run `bundle install` to install application dependencies.
 
-* System dependencies
+* Database included as a sqlite file.
 
-* Configuration
+* Run `rake db:setup` to create the databases and load seeds.
 
-* Database creation
+* Run test suite with `bundle exec rspec`
 
-* Database initialization
+## Domain Model
 
-* How to run the test suite
+![Domail Model]("./public/diagram.png)
 
-* Services (job queues, cache servers, search engines, etc.)
+## Assessment Assumptions
 
-* Deployment instructions
-
-* ...
+1. Any Employee can be assigned to the Monitoring Shift of any Service.
+2. Employees availability is always the same.
+3. A Service can only have one Monitoring Schema.
+4. It is assumed that all Weeks start on a Monday.
+5. Mantainers for Employees, Services, Weeks and Monitoring Schemas were not considered in the development of the MVP.
