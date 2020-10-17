@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe Contract, type: :model do
+RSpec.describe MonitoringSchema, type: :model do
   it { should belong_to(:service) }
 end

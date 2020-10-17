@@ -1,3 +1,3 @@
 class Week < ApplicationRecord
-  validates_presence_of :name, :start_date
+  validates_presence_of :name, :start_date, :end_date
 end
