@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_17_124932) do
+ActiveRecord::Schema.define(version: 2020_10_17_030040) do
 
   create_table "employees", force: :cascade do |t|
     t.string "name"
@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(version: 2020_10_17_124932) do
 
   create_table "monitoring_schemas", force: :cascade do |t|
     t.integer "service_id", null: false
+    t.json "structure"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.json "structure"
     t.index ["service_id"], name: "index_monitoring_schemas_on_service_id"
   end
 
@@ -36,9 +36,9 @@ ActiveRecord::Schema.define(version: 2020_10_17_124932) do
   create_table "weeks", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
+    t.date "end_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.date "end_date"
   end
 
   add_foreign_key "monitoring_schemas", "services"
