@@ -3,8 +3,7 @@ module Api
     class ServicesController < ApplicationController
       
       def index
-        @services = Service.all
-        render json: @services, status: 200
+        render json: Service.all, status: 200
       end
 
     end

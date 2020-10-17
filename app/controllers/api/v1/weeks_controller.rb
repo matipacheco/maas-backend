@@ -3,9 +3,7 @@ module Api
     class WeeksController < ApplicationController
       
       def index
-        # TODO: check weeks rule!
-        @weeks = Week.all
-        render json: @weeks, status: 200
+        render json: Week.available, status: 200
       end
 
     end
