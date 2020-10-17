@@ -15,4 +15,9 @@ FactoryBot.define do
     start_date { Date.today.beginning_of_week }
     end_date { Date.today.end_of_week }
   end
+
+  factory :monitoring_shift do
+    service
+    week
+  end
 end

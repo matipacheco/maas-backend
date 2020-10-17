@@ -8,11 +8,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-recorrido = Service.create(name: 'Recorrido.cl')
+Service.create(name: 'Recorrido.cl')
 Service.create(name: 'Brutal')
 
 MonitoringSchema.create(
-  service: recorrido,
+  service: Service.first,
   structure: {
     1 => (19..23),
     2 => (19..23),
@@ -39,3 +39,5 @@ start_day = Date.today.beginning_of_week
     start_date: start_day + number * week
   )
 end
+
+MonitoringShift.create(service: Service.first, week: Week.first)
