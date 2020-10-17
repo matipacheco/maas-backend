@@ -14,7 +14,7 @@
 
 ## Domain Model
 
-![Domail Model]("./public/diagram.png)
+![Domail Model](./public/diagram.png)
 
 ## Assessment Assumptions
 
