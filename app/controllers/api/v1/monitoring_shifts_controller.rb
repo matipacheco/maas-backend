@@ -6,7 +6,7 @@ module Api
       before_action :permit_params, only: [:show]
       
       def show
-        render json: MonitoringShift.where(@params), status: 200
+        render json: MonitoringShift.find_by(@params), status: 200
       end
 
       private
