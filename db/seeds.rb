@@ -14,13 +14,13 @@ Service.create(name: 'Brutal')
 MonitoringSchema.create(
   service: Service.first,
   structure: {
+    0 => (19..23),
     1 => (19..23),
     2 => (19..23),
     3 => (19..23),
     4 => (19..23),
-    5 => (19..23),
-    6 => (0..23),
-    7 => (0..23)
+    5 => (0..23),
+    6 => (0..23)
   }
 )
 
