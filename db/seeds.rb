@@ -6,8 +6,21 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Service.create(name: "Recorrido.cl")
+recorrido = Service.create(name: "Recorrido.cl")
 Service.create(name: "Brutal")
+
+MonitoringSchema.create(
+  service: recorrido,
+  structure: {
+    1 => (19..23),
+    2 => (19..23),
+    3 => (19..23),
+    4 => (19..23),
+    5 => (19..23),
+    6 => (0..23),
+    7 => (0..23),
+  }
+)
 
 Employee.create(name: "Mati", availability: 15)
 Employee.create(name: "Benjamín", availability: 16)
