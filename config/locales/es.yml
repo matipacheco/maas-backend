@@ -1,7 +1,7 @@
 es:
   date:
     formats:
-      default: '%d/%M/%Y'
+      default: '%d/%m/%Y'
       week: '%A %d de %B'
     day_names:
     - Domingo

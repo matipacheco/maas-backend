@@ -36,7 +36,7 @@ week = 7.days
 end_day = Date.today.end_of_week
 start_day = Date.today.beginning_of_week
 
-(1..5).each do |number|
+(0..5).each do |number|
   Week.create(
     name: "Semana #{number}",
     end_date: end_day + number * week,
