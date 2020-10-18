@@ -7,17 +7,17 @@ class Week < ApplicationRecord
 
   scope :valid_week_range, -> { where('start_date <= ?', Date.today.beginning_of_week + 5.weeks) }
 
-  def get_availabilities
+  def get_availabilities(schema)
     schedule = {}
 
-    (0...7).each do |day|
+    schema.each do |day_index, hours|
       available_slots = {}
 
-      (0...24).each do |hour|
-        available_slots[hour] = availabilities.where(day: day, hour: hour).pluck(:employee_id)
+      hours.each do |hour|
+        available_slots[hour] = availabilities.where(day: day_index, hour: hour).pluck(:employee_id)
       end
 
-      schedule[(start_date + day.days).week_day_format] = available_slots
+      schedule[(start_date + day_index.days).week_day_format] = available_slots
     end
 
     schedule

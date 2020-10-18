@@ -9,10 +9,6 @@ module Api
         render json: Week.valid_week_range, status: 200
       end
 
-      def availabilities
-        render json: @week.get_availabilities, status: 200
-      end
-
       private
 
       def get_week

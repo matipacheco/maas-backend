@@ -14,6 +14,11 @@ class MonitoringShift < ApplicationRecord
     schema.transform_keys { |day_index| (date + day_index.days).week_day_format }
   end
 
+  def get_availabilities
+    schema = service.monitoring_schema.structure
+    week.get_availabilities(schema)
+  end
+
   def as_json(*)
     super.tap do |hash|
       hash['schedule'] = build_monitoring_schedule
