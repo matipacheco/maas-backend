@@ -8,33 +8,33 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Service.create(name: 'Recorrido.cl')
-Service.create(name: 'Brutal')
+recorrido = Service.create(name: 'Recorrido.cl')
+brutal = Service.create(name: 'Brutal')
 
 MonitoringSchema.create(
-  service: Service.first,
+  service: recorrido,
   structure: {
-    0 => (19..24).to_a,
-    1 => (19..24).to_a,
-    2 => (19..24).to_a,
-    3 => (19..24).to_a,
-    4 => (19..24).to_a,
-    5 => (0..24).to_a,
-    6 => (0..24).to_a
+    0 => (19...24).to_a,
+    1 => (19...24).to_a,
+    2 => (19...24).to_a,
+    3 => (19...24).to_a,
+    4 => (19...24).to_a,
+    5 => (0...24).to_a,
+    6 => (0...24).to_a
   }
 )
 
 MonitoringSchema.create(
-  service: Service.last,
+  service: brutal,
   structure: {
-    0 => (0..11).to_a,
-    1 => (0..11).to_a,
+    0 => (0...12).to_a,
+    1 => (0...12).to_a,
   }
 )
 
-Employee.create(name: 'Mati', availability: 15)
-Employee.create(name: 'Benjamín', availability: 16)
-Employee.create(name: 'Lennart', availability: 19)
+Employee.create(name: 'Mati')
+Employee.create(name: 'Benjamín')
+Employee.create(name: 'Lennart')
 
 week = 7.days
 end_day = Date.today.end_of_week
@@ -48,5 +48,5 @@ start_day = Date.today.beginning_of_week
   )
 end
 
-MonitoringShift.create(service: Service.first, week: Week.first)
-MonitoringShift.create(service: Service.last, week: Week.first)
+MonitoringShift.create(service: recorrido, week: Week.first)
+MonitoringShift.create(service: brutal, week: Week.first)
