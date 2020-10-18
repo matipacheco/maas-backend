@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class MonitoringShift < ApplicationRecord
+  include DateHandler
+
   belongs_to :week
   belongs_to :service
 
@@ -13,7 +15,7 @@ class MonitoringShift < ApplicationRecord
 
   def build_monitoring_schedule(date = week.start_date)
     schema = service.monitoring_schema.structure
-    schema.transform_keys { |day_index| (date + day_index.days).week_day_format }
+    schema.transform_keys { |day_index| format_date(date + day_index.days, :week) }
   end
 
   def get_availabilities

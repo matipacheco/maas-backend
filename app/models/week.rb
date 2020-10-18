@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Week < ApplicationRecord
+  include DateHandler
+
   has_many :availabilities
 
   validates_presence_of :name, :start_date, :end_date
@@ -17,7 +19,7 @@ class Week < ApplicationRecord
         available_slots[hour] = availabilities.where(day: day_index, hour: hour).pluck(:employee_id)
       end
 
-      schedule[(start_date + day_index.days).week_day_format] = available_slots
+      schedule[format_date(start_date + day_index.days, :week)] = available_slots
     end
 
     schedule
@@ -25,8 +27,8 @@ class Week < ApplicationRecord
 
   def as_json(*)
     super.tap do |hash|
-      hash['start_date'] = start_date.base_format
-      hash['end_date'] = end_date.base_format
+      hash['start_date'] = format_date(start_date)
+      hash['end_date'] = format_date(end_date)
     end
   end
 end
