@@ -23,6 +23,7 @@ FactoryBot.define do
   factory :availability do
     week
     employee
+    monitoring_shift
     day { rand(0...7) }
     hour { rand(0...24) }
   end

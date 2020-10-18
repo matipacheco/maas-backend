@@ -3,7 +3,7 @@
 module Api
   module V1
     class MonitoringShiftsController < ApplicationController
-      before_action :get_shift, only: [:show, :availabilities, :update_availability]
+      before_action :get_shift, only: %i[show availabilities update_availability]
 
       def show
         render json: @shift, status: 200

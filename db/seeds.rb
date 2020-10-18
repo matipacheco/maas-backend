@@ -56,12 +56,14 @@ Employee.create(name: 'Lennart')
 (0...7).each do |day|
   (0...24).each do |hour|
     availabilities = Array.new(rand(0..3)) { rand(1..3) }.uniq
-    availabilities.each { |number| Availability.create(
-      monitoring_shift: first_shift,
-      week: week,
-      employee_id: number,
-      day: day,
-      hour: hour
-    ) }
+    availabilities.each do |number|
+      Availability.create(
+        monitoring_shift: first_shift,
+        week: week,
+        employee_id: number,
+        day: day,
+        hour: hour
+      )
+    end
   end
 end
