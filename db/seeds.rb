@@ -32,10 +32,6 @@ MonitoringSchema.create(
   }
 )
 
-Employee.create(name: 'Mati')
-Employee.create(name: 'Benjamín')
-Employee.create(name: 'Lennart')
-
 week = 7.days
 end_day = Date.today.end_of_week
 start_day = Date.today.beginning_of_week
@@ -50,3 +46,14 @@ end
 
 MonitoringShift.create(service: recorrido, week: Week.first)
 MonitoringShift.create(service: brutal, week: Week.first)
+
+Employee.create(name: 'Mati')
+Employee.create(name: 'Benjamín')
+Employee.create(name: 'Lennart')
+
+(0...24).each do |number|
+  hour = Hour.create(hour: number)
+  availabilities = Array.new(rand(0..3)) { rand(1..3) }.uniq
+  availabilities.each { |number| EmployeeAvailability.create(hour: hour, employee_id: number) }
+end
+
