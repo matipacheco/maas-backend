@@ -13,6 +13,8 @@ class MonitoringShift < ApplicationRecord
 
   serialize :structure
 
+  after_save :generate_schedule
+
   def build_monitoring_schedule(date = week.start_date)
     schema = service.monitoring_schema.structure
     schema.transform_keys { |day_index| format_date(date + day_index.days, :week) }
@@ -32,6 +34,10 @@ class MonitoringShift < ApplicationRecord
       availability = availabilities.build(params)
       availability.save
     end
+  end
+
+  def generate_schedule
+    # TODO: develop algorithm!
   end
 
   def as_json(*)
