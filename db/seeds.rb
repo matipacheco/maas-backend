@@ -44,16 +44,19 @@ start_day = Date.today.beginning_of_week
   )
 end
 
-MonitoringShift.create(service: recorrido, week: Week.first)
-MonitoringShift.create(service: brutal, week: Week.first)
+week = Week.first
+
+MonitoringShift.create(service: recorrido, week: week)
+MonitoringShift.create(service: brutal, week: week)
 
 Employee.create(name: 'Mati')
 Employee.create(name: 'Benjamín')
 Employee.create(name: 'Lennart')
 
-(0...24).each do |number|
-  hour = Hour.create(hour: number)
-  availabilities = Array.new(rand(0..3)) { rand(1..3) }.uniq
-  availabilities.each { |number| EmployeeAvailability.create(hour: hour, employee_id: number) }
+(0...7).each do |day|
+  (0...24).each do |hour|
+    availabilities = Array.new(rand(0..3)) { rand(1..3) }.uniq
+    availabilities.each { |number| Availability.create(week: week, day: day, hour: hour, employee_id: number) }
+  end
 end
 

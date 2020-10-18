@@ -3,12 +3,17 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :weeks, only: [:index]
+      resources :weeks, only: [:index] do
+        member do
+          get 'availabilities'
+        end
+      end
+
       resources :services, only: [:index]
       resources :employees, only: [:index]
-      resources :employee_availabilities, only: [:index]
 
-      get '/monitoring_shifts/:service_id/:week_id' => 'monitoring_shifts#show'
+      put '/availabilities/:week_id/:service_id' => 'availabilities#update'
+      get '/monitoring_shifts/:week_id/:service_id' => 'monitoring_shifts#show'
     end
   end
 end

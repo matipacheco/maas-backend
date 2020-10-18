@@ -10,26 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_18_114824) do
+ActiveRecord::Schema.define(version: 2020_10_18_124832) do
 
   create_table "availabilities", force: :cascade do |t|
     t.integer "week_id", null: false
-    t.integer "hour_id", null: false
+    t.integer "day"
+    t.integer "hour"
     t.integer "employee_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["employee_id"], name: "index_availabilities_on_employee_id"
-    t.index ["hour_id"], name: "index_availabilities_on_hour_id"
     t.index ["week_id"], name: "index_availabilities_on_week_id"
-  end
-
-  create_table "employee_availabilities", force: :cascade do |t|
-    t.integer "hour_id", null: false
-    t.integer "employee_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["employee_id"], name: "index_employee_availabilities_on_employee_id"
-    t.index ["hour_id"], name: "index_employee_availabilities_on_hour_id"
   end
 
   create_table "employees", force: :cascade do |t|
@@ -78,9 +69,6 @@ ActiveRecord::Schema.define(version: 2020_10_18_114824) do
   end
 
   add_foreign_key "availabilities", "employees"
-  add_foreign_key "availabilities", "hours"
   add_foreign_key "availabilities", "weeks"
-  add_foreign_key "employee_availabilities", "employees"
-  add_foreign_key "employee_availabilities", "hours"
   add_foreign_key "monitoring_schemas", "services"
 end

@@ -2,7 +2,7 @@
 
 class Date
   def base_format
-    strftime()
+    strftime('%d/%M/%Y')
   end
 
   def week_day_format
