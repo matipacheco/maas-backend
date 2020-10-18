@@ -3,7 +3,7 @@
 module Api
   module V1
     class MonitoringShiftsController < ApplicationController
-      before_action :get_shift, only: [:show, :availabilities]
+      before_action :get_shift, only: [:show, :availabilities, :update_availability]
 
       def show
         render json: @shift, status: 200
@@ -13,6 +13,10 @@ module Api
         render json: @shift.get_availabilities, status: 200
       end
 
+      def update_availability
+        render json: @shift.update_availability(permit_availability_params), status: 200
+      end
+
       private
 
       def get_shift
@@ -20,7 +24,11 @@ module Api
       end
 
       def permit_params
-        params.permit(:service_id, :week_id)
+        @params = params.permit(:id, :service_id, :week_id)
+      end
+
+      def permit_availability_params
+        @availability_params = params.require(:availability).permit(:week_id, :employee_id, :day, :hour)
       end
     end
   end

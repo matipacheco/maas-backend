@@ -4,6 +4,8 @@ class MonitoringShift < ApplicationRecord
   belongs_to :week
   belongs_to :service
 
+  has_many :availabilities
+
   validates_presence_of :week
   validates_presence_of :service
 
@@ -17,6 +19,17 @@ class MonitoringShift < ApplicationRecord
   def get_availabilities
     schema = service.monitoring_schema.structure
     week.get_availabilities(schema)
+  end
+
+  def update_availability(params)
+    availability = availabilities.where(params)
+
+    if availability.any?
+      availability.map(&:destroy)
+    else
+      availability = availabilities.build(params)
+      availability.save
+    end
   end
 
   def as_json(*)
