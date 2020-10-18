@@ -11,7 +11,7 @@ class MonitoringShift < ApplicationRecord
 
   def build_monitoring_schedule(date = week.start_date)
     schema = service.monitoring_schema.structure
-    return schema.transform_keys { |day_index| (date + day_index.days).week_day_format }
+    schema.transform_keys { |day_index| (date + day_index.days).week_day_format }
   end
 
   def as_json(*)

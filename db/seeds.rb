@@ -28,7 +28,7 @@ MonitoringSchema.create(
   service: brutal,
   structure: {
     0 => (0...12).to_a,
-    1 => (0...12).to_a,
+    1 => (0...12).to_a
   }
 )
 
@@ -59,4 +59,3 @@ Employee.create(name: 'Lennart')
     availabilities.each { |number| Availability.create(week: week, day: day, hour: hour, employee_id: number) }
   end
 end
-

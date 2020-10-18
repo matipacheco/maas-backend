@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Availability < ApplicationRecord
   belongs_to :week
   belongs_to :employee

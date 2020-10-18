@@ -16,6 +16,14 @@
 
 ![Domail Model](./public/diagram.png)
 
+`availabilities` has references to both Employees and Weeks, but the days and hours in which an Employee is available are stored as integers. Note: The `day` field represents the index of that day of the week.
+
+| id | week_id | employee_id | day | hour |
+| -- |:-------:|:-----------:|:---:| ----:|
+| 1  |  2      | 1           | 0   | 23   |
+
+This means that in the **second week**, the **Employee with ID 1** can work on **Monday** (index 0) at **23:00** hours.
+
 ### Note
 
 The `monitoring_schemas` table has a `JSON` field named `structure`. This field stores the schedule delivered by a client for their service to be monitored. This schedule is a hash, in which the keys represents a day of the week by its index, and the values are arrays that represent a range of hours of the day.
@@ -51,6 +59,7 @@ A similar thing applies to the `structure` field for a `monitoring_shit`. This f
 ```
 
 Using the `monitoring_schema` shown at the beginning, this structure states that the Monday of that week the shift from 19 hours to 22 hours will be in charge of the Employee with ID 1, and the second shift, from 22 hours to midnight, will be in charge of the Employee with ID 2.
+
 
 ## Assessment Assumptions
 
