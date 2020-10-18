@@ -2,7 +2,5 @@
 
 class MonitoringSchema < ApplicationRecord
   belongs_to :service
-
   serialize :structure
-
 end

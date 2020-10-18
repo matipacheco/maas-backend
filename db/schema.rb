@@ -12,10 +12,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_201_017_144_306) do
+ActiveRecord::Schema.define(version: 20_201_018_180_953) do
+  create_table 'availabilities', force: :cascade do |t|
+    t.integer 'monitoring_shift_id', null: false
+    t.integer 'employee_id', null: false
+    t.integer 'week_id', null: false
+    t.integer 'day'
+    t.integer 'hour'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['employee_id'], name: 'index_availabilities_on_employee_id'
+    t.index ['monitoring_shift_id'], name: 'index_availabilities_on_monitoring_shift_id'
+    t.index ['week_id'], name: 'index_availabilities_on_week_id'
+  end
+
   create_table 'employees', force: :cascade do |t|
     t.string 'name'
-    t.integer 'availability'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
   end
@@ -52,5 +64,8 @@ ActiveRecord::Schema.define(version: 20_201_017_144_306) do
     t.datetime 'updated_at', precision: 6, null: false
   end
 
+  add_foreign_key 'availabilities', 'employees'
+  add_foreign_key 'availabilities', 'monitoring_shifts'
+  add_foreign_key 'availabilities', 'weeks'
   add_foreign_key 'monitoring_schemas', 'services'
 end

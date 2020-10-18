@@ -12,13 +12,20 @@ FactoryBot.define do
 
   factory :employee do
     name { 'Test Employee' }
-    availability { rand(1...20) }
   end
 
   factory :week do
     name { 'Test Week' }
     start_date { Date.today.beginning_of_week }
     end_date { Date.today.end_of_week }
+  end
+
+  factory :availability do
+    week
+    employee
+    monitoring_shift
+    day { rand(0...7) }
+    hour { rand(0...24) }
   end
 
   factory :monitoring_shift do

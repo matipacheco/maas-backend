@@ -5,11 +5,11 @@ require 'rails_helper'
 RSpec.describe 'Weeks Controller', type: :request do
   let!(:weeks) do
     (-4..10).each do |number|
-      week = 7.days
+      n_weeks = number * 7.days
       end_day = Date.today.end_of_week
       start_day = Date.today.beginning_of_week
 
-      create(:week, end_date: end_day + number * week, start_date: start_day + number * week)
+      create(:week, end_date: end_day + n_weeks, start_date: start_day + n_weeks)
     end
   end
 
