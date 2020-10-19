@@ -21,7 +21,6 @@ FactoryBot.define do
   end
 
   factory :availability do
-    week
     employee
     monitoring_shift
     day { rand(0...7) }
@@ -29,7 +28,18 @@ FactoryBot.define do
   end
 
   factory :monitoring_shift do
-    service
     week
+    service
+    structure {
+      {
+        0 => {
+          19 =>1,
+          20 =>1,
+          21 =>1,
+          22 =>2,
+          23 =>2
+        }
+      }
+    }
   end
 end

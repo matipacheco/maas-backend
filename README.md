@@ -18,11 +18,11 @@
 
 `availabilities` has references to both Employees and Weeks, but the days and hours in which an Employee is available are stored as integers. Note: The `day` field represents the index of that day of the week.
 
-| id | monitoring_shift_id | week_id | employee_id | day | hour |
-| -- |:-------------------:|:-------:|:-----------:|:---:| ----:|
-| 1  |1                    |  2      | 1           | 0   | 23   |
+| id | monitoring_shift_id | employee_id | day | hour |
+| -- |:-------------------:|:-----------:|:---:| ----:|
+| 1  |1                    | 1           | 0   | 23   |
 
-This means that in the **second week** of the **first monitoring shift**, the **Employee with ID 1** can work on **Monday** (index 0) at **23:00** hours.
+This means that for the **first monitoring shift**, the **Employee with ID 1** can work on **Monday** (index 0) at **23:00** hours.
 
 ### Note
 

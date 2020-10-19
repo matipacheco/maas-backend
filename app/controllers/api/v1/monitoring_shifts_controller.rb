@@ -32,7 +32,7 @@ module Api
       end
 
       def permit_availability_params
-        @availability_params = params.require(:availability).permit(:week_id, :employee_id, :day, :hour)
+        @availability_params = params.require(:availability).permit(:employee_id, :day, :hour)
       end
     end
   end

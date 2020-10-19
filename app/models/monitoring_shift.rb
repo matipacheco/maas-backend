@@ -15,14 +15,21 @@ class MonitoringShift < ApplicationRecord
 
   after_save :generate_schedule
 
-  def build_monitoring_schedule(date = week.start_date)
-    schema = service.monitoring_schema.structure
-    schema.transform_keys { |day_index| format_date(date + day_index.days, :week) }
-  end
-
   def get_availabilities
     schema = service.monitoring_schema.structure
-    week.get_availabilities(schema)
+    schedule = {}
+
+    schema.each do |day_index, hours|
+      available_slots = {}
+
+      hours.each do |hour|
+        available_slots[hour] = availabilities.where(day: day_index, hour: hour).pluck(:employee_id)
+      end
+
+      schedule[format_date(week.start_date + day_index.days, :week)] = available_slots
+    end
+
+    schedule
   end
 
   def update_availability(params)
@@ -42,7 +49,7 @@ class MonitoringShift < ApplicationRecord
 
   def as_json(*)
     super.tap do |hash|
-      hash['schedule'] = build_monitoring_schedule
+      hash['structure'] = structure.transform_keys { |day_index| format_date(week.start_date + day_index.days, :week) } rescue nil
     end
   end
 end

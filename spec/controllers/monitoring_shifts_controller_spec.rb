@@ -8,7 +8,7 @@ RSpec.describe 'Monitoring Shifts Controller', type: :request do
   let(:employee) { create(:employee) }
   let!(:schema) { create(:monitoring_schema, service: service) }
   let!(:monitoring_shift) { create(:monitoring_shift, service: service, week: week) }
-  let!(:availability) { create(:availability, monitoring_shift: monitoring_shift, week: week, employee: employee) }
+  let!(:availability) { create(:availability, monitoring_shift: monitoring_shift, employee: employee) }
 
   describe 'GET /api/v1/monitoring_shifts' do
     before { get "/api/v1/monitoring_shifts/#{Week.first.id}/#{Service.first.id}" }
@@ -17,7 +17,7 @@ RSpec.describe 'Monitoring Shifts Controller', type: :request do
       shift_response = JSON.parse(response.body)
 
       expect(shift_response).not_to be_empty
-      expect(shift_response['schedule']).not_to be_empty
+      expect(shift_response['structure']).not_to be_empty
     end
 
     it 'returns status code 200' do
@@ -41,7 +41,7 @@ RSpec.describe 'Monitoring Shifts Controller', type: :request do
 
   context 'PUT /api/v1/monitoring_shifts/:id/availabilities' do
     describe 'Availability deletion' do
-      let!(:existing_availability) { create(:availability, monitoring_shift: monitoring_shift, week: week, employee: employee, day: 0, hour: 0) }
+      let!(:existing_availability) { create(:availability, monitoring_shift: monitoring_shift, employee: employee, day: 0, hour: 0) }
 
       before do
         put "/api/v1/monitoring_shifts/#{monitoring_shift.id}/availabilities", params: {
@@ -67,7 +67,6 @@ RSpec.describe 'Monitoring Shifts Controller', type: :request do
       before do
         put "/api/v1/monitoring_shifts/#{monitoring_shift.id}/availabilities", params: {
           availability: {
-            week_id: week.id,
             employee_id: employee.id,
             day: 6,
             hour: 24
@@ -77,8 +76,8 @@ RSpec.describe 'Monitoring Shifts Controller', type: :request do
 
       it 'should create an availability entry' do
         expect(Availability.where({
-                                    week_id: week.id,
-                                    employee_id: employee.id,
+                                    monitoring_shift: monitoring_shift,
+                                    employee: employee,
                                     day: 6,
                                     hour: 24
                                   })).not_to be_empty
