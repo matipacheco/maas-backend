@@ -62,7 +62,10 @@ class MonitoringShift < ApplicationRecord
   def as_json(*)
     super.tap do |hash|
       hash['structure'] = begin
-                            structure.transform_keys { |day_index| format_date(week.start_date + day_index.days, :week) }
+                            {
+                              workloads: structure[:workloads],
+                              schedule: structure[:schedule].transform_keys { |day_index| format_date(week.start_date + day_index.days, :week) }
+                            }
                           rescue StandardError
                             nil
                           end

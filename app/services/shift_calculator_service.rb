@@ -12,7 +12,7 @@ class ShiftCalculatorService
     result = {}
     @@current_employee = nil
     @@availabilities = availabilities
-    @@hours_worked = { 1 => 0, 2 => 0, 3 => 0 }
+    @@hours_worked = { 1 => 0, 2 => 0, 3 => 0, nil => 0 }
 
     schema.each do |day_index, hour_range|
       daily_schedule = {}
@@ -73,7 +73,10 @@ class ShiftCalculatorService
       result[day_index] = daily_schedule
     end
 
-    result
+    {
+      schedule: result,
+      workloads: @@hours_worked
+    }
   end
 
   def self.get_lazy(day_index, hour)
@@ -83,8 +86,6 @@ class ShiftCalculatorService
   end
 
   def self.update_workload(employee_id)
-    return unless employee_id
-
     @@hours_worked[employee_id] = @@hours_worked[employee_id] + 1
   end
 
