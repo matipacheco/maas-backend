@@ -8,10 +8,9 @@ Rails.application.routes.draw do
       resources :employees, only: [:index]
 
       get '/monitoring_shifts/:id/availabilities' => 'monitoring_shifts#availabilities'
-      get '/monitoring_shifts/:week_id/:service_id' => 'monitoring_shifts#show'
-
+      get '/monitoring_shifts' => 'monitoring_shifts#show'
       put '/monitoring_shifts/:id/availabilities' => 'monitoring_shifts#update_availability'
-      put '/monitoring_shifts/:id' => 'monitoring_shifts#generate_schedule'
+      put '/monitoring_shifts/:id' => 'monitoring_shifts#update'
     end
   end
 end

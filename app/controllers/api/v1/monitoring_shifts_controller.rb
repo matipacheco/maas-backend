@@ -4,7 +4,7 @@ module Api
   module V1
     class MonitoringShiftsController < ApplicationController
       before_action :get_or_create_shift, only: %i[show]
-      before_action :get_shift, only: %i[show availabilities update_availability generate_schedule]
+      before_action :get_shift, only: %i[show availabilities update_availability update]
 
       def show
         render json: @shift, status: 200
@@ -18,7 +18,7 @@ module Api
         render json: @shift.update_availability(permit_availability_params), status: 200
       end
 
-      def generate_schedule
+      def update
         render json: @shift.generate_schedule, status: 200
       end
 
