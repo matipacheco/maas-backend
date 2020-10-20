@@ -11,7 +11,7 @@ RSpec.describe 'Monitoring Shifts Controller', type: :request do
   let!(:availability) { create(:availability, monitoring_shift: monitoring_shift, employee: employee) }
 
   describe 'GET /api/v1/monitoring_shifts' do
-    before { get "/api/v1/monitoring_shifts/#{Week.first.id}/#{Service.first.id}" }
+    before { get "/api/v1/monitoring_shifts?week_id=#{Week.first.id}&service_id#{Service.first.id}" }
 
     it 'returns monitoring shift' do
       shift_response = JSON.parse(response.body)
