@@ -15,7 +15,7 @@ class MonitoringShift < ApplicationRecord
 
   after_save :generate_schedule
 
-  def get_availabilities
+  def get_availabilities(date_formatted = true)
     schema = service.monitoring_schema.structure
     schedule = {}
 
@@ -26,7 +26,11 @@ class MonitoringShift < ApplicationRecord
         available_slots[hour] = availabilities.where(day: day_index, hour: hour).pluck(:employee_id)
       end
 
-      schedule[format_date(week.start_date + day_index.days, :week)] = available_slots
+      if date_formatted
+        schedule[format_date(week.start_date + day_index.days, :week)] = available_slots
+      else
+        schedule[day_index] = available_slots
+      end
     end
 
     schedule
@@ -44,7 +48,15 @@ class MonitoringShift < ApplicationRecord
   end
 
   def generate_schedule
-    # TODO: develop algorithm!
+    return unless availabilities
+
+    update_column(
+      :structure,
+      ShiftCalculatorService.calculate(
+        get_availabilities(false),
+        service.monitoring_schema.structure
+      )
+    )
   end
 
   def as_json(*)
