@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Service in charge of the creation of the structure of a monitoring shift.
 # This service uses the following algorithms to assign a shift to an employee.
 
@@ -6,7 +8,7 @@
 # 3. Whenever an employee isn't available on a given time block, it selects the employee who has the most consecutive time blocks starting that point (To reduce shift changing).
 
 class ShiftCalculatorService
-  def self.calculate availabilities, schema
+  def self.calculate(availabilities, schema)
     result = {}
     @@current_employee = nil
     @@availabilities = availabilities
@@ -15,7 +17,7 @@ class ShiftCalculatorService
     schema.each do |day_index, hour_range|
       daily_schedule = {}
 
-      hour_range.each_with_index do |hour, index|
+      hour_range.each do |hour|
         # It assigns the first shift to the first available employee with the lighter workload
         unless @@current_employee
           get_lazy(day_index, hour)
@@ -51,17 +53,17 @@ class ShiftCalculatorService
 
           # Case 2.2: If there are employees available in the current shift and in the next one.
           shared_availability = other_availabilities.intersection(tomorrow_availabilities)
-          
-          # Case 2.2.1: But they are different employees...
-          if shared_availability.empty?
-            @@current_employee = other_availabilities.first
 
-          # Case 2.2.2: They are the same. Meaning that some of the available employees
-          # in the current shift are also available in the next one
-          else
-            @@current_employee = shared_availability.first
-            
-          end
+          # Case 2.2.1: But they are different employees...
+          @@current_employee = if shared_availability.empty?
+                                 other_availabilities.first
+
+                               # Case 2.2.2: They are the same. Meaning that some of the available employees
+                               # in the current shift are also available in the next one
+                               else
+                                 shared_availability.first
+
+                               end
 
           assign_employee(daily_schedule, hour, @@current_employee)
         end
@@ -76,14 +78,13 @@ class ShiftCalculatorService
 
   def self.get_lazy(day_index, hour)
     @@hours_worked.sort_by(&:last).map(&:first).each do |employee_id|
-      if is_available?(day_index, hour, employee_id)
-        return @@current_employee = employee_id
-      end
+      return @@current_employee = employee_id if is_available?(day_index, hour, employee_id)
     end
   end
 
-  def self.update_workload employee_id
+  def self.update_workload(employee_id)
     return unless employee_id
+
     @@hours_worked[employee_id] = @@hours_worked[employee_id] + 1
   end
 

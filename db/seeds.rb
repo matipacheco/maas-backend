@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 recorrido = Service.create(name: 'Recorrido.cl')
 brutal = Service.create(name: 'Brutal')
 

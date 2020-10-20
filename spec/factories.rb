@@ -30,16 +30,16 @@ FactoryBot.define do
   factory :monitoring_shift do
     week
     service
-    structure {
+    structure do
       {
         0 => {
-          19 =>1,
-          20 =>1,
-          21 =>1,
-          22 =>2,
-          23 =>2
+          19 => 1,
+          20 => 1,
+          21 => 1,
+          22 => 2,
+          23 => 2
         }
       }
-    }
+    end
   end
 end
