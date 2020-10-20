@@ -69,6 +69,19 @@ The `monitoring_shits` has references to both `services` and `weeks` tables.  Th
 
 Taking the  `structure` of the `monitoring_schema` shown in the previous section, the `structure` of this `monitoring_shit` states that the **Monday** of that week the shift **from 19 hours to 22 hours** will be in charge of the **Employee with ID 1**, and the second shift, **from 22 hours to midnight**, will be in charge of the **Employee with ID 2**.
 
+This field also stores the workloads assinged for each Employee for that particular Monitoring Shift. After the schedule has been calulated, a workload hash is included to the `structure`. Workloads look like this:
+
+```
+  {
+    1 =>15,
+    2 =>30,
+    3 =>5,
+    nil =>50
+  }
+```
+
+This means that, for a particular week, the Employee with ID will work 15 time blocks, Employee with ID 2 will work 30 time blocks, and the Employee with ID 3 will work 5 time blocks. There will also be 50 time blocks unassigned.
+
 
 ## Assessment Assumptions
 

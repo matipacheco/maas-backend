@@ -59,4 +59,4 @@ Employee.create(name: 'Lennart')
   end
 end
 
-first_shift.generate_schedule
+MonitoringShift.all.map(&:generate_schedule)
