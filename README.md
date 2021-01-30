@@ -83,7 +83,7 @@ This field also stores the workloads assinged for each Employee for that particu
 This means that, for a particular week, the Employee with ID will work 15 time blocks, Employee with ID 2 will work 30 time blocks, and the Employee with ID 3 will work 5 time blocks. There will also be 50 time blocks unassigned.
 
 
-## Assessment Assumptions
+## Assumptions
 
 1. Any Employee can be assigned to the Monitoring Shift of any Service.
 2. A Service can only have one Monitoring Schema.

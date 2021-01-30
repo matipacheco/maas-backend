@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-museminded = Service.create(name: 'Museminded')
+museminded = Service.create(name: 'MuseMinded')
 coral = Service.create(name: 'Coral')
 
 MonitoringSchema.create(
